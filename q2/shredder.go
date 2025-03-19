@@ -22,6 +22,8 @@ func main() {
 	file_path := os.Args[1]
 
 	shred(file_path)
+
+	os.Exit(0)
 }
 
 //Main function
@@ -137,7 +139,7 @@ func shred(path string) {
 			os.Exit(12)
 		} else {
 			fmt.Printf("File %s shredded and destroyed.\n", path)
-			os.Exit(0)
+			return
 		}
 
 	//If the user does not want the files destroyed, or input can't be understood, abort immediately

@@ -44,7 +44,7 @@ Due to the destructive nature of this program, it should be used with care and c
 2. If the program cannot find the file, it will exit gracefully.
 3. The program ensures all bytes have been written in every iteraton before continuing, ensuring that the file is completely overwritten 3 times, or else an error will occur, and the program will exit gracefully.
 4. The program will produce user-readable error messages for issues like seeking, writing, syncing, etc...
-5. Evaluates symlinks, ensuring desired targeted data is deleted
+5. Evaluates symlinks, ensuring desired targeted data is deleted.
 
 ## Drawbacks
 1. The program currently is really inefficient for large files, due to the way that the random array is created in one sweep
@@ -53,7 +53,7 @@ Due to the destructive nature of this program, it should be used with care and c
 
 ## Edge Cases
 1. No input - Handled by returning 1 to caller.
-2.
+2. Error evaluating symlink - Handled by returning 2 to caller
 3. File existence - Handled by getting file info, if this fails, likely because the file doesn't exist. returns 2 to caller
 4. Directories - Handled by not intercating with directories, aborting if directory is detected. Returns code 3 to caller.
 5. Empty - Handled by checking if file is empty. Returns code 4 to caller.
@@ -96,11 +96,13 @@ Due to the destructive nature of this program, it should be used with care and c
 - If any other pattern is detected, cannot be sure of user intention, abort immediately. Will also return exit code 7.
 
 6. Loop 3 times, generate a random array of bytes the same length of the file, seek to the start of the file, and attempt to overwrite the file with the random array.
-- If a seek error occurs, program will return with exit code 6.
-- If a sync error occurs , program will return with exit code 7.
+- If a random number generation error occurs program will return with exit code 8.
+- If a seek error occurs, program will return with exit code 9.
+- If an overwrite error occurs, program will return with exit code 10.
+- If a sync error occurs , program will return with exit code 11.
 
 7. Close the file, and attempt to unlink it.
-- If an error occurs with unlinking, program will return with exit code 8.
+- If an error occurs with unlinking, program will return with exit code 12.
 
 8. If all above steps complete successfully, the program will return with error code 0.
 
