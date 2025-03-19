@@ -3,6 +3,8 @@ This is my submission to the technical interview component of an open-source sof
 
 The code can be found on the Github repository [here](https://github.com/Rnfudge02/technical_interview.git)
 
+Robert Fudge
+
 # Use
 This code is licensed under the Apache 2.0 license, feel free to use these snippets as a building point for larger programs.
 
@@ -14,7 +16,7 @@ The challenge was to create a minimal linux image that has an ext4 filesystem an
 The program should be bootable via QEMU.
 
 ## Use cases
-Building containerized images with linux kernel and FS.
+Building containerized images with linux kernel and File system.
 
 ## Methodology
 1. Create a script function that compiles the linux kernel with ext4 support and serial console for terminal output.
@@ -114,8 +116,13 @@ Run 'make all', and interact with user prompts to complete the full testing suit
 
 For now, the makefile can be used to perform some tests. The tests do the following:
 1. make all - Runs the subsequent commands in proper order.
-2. make - Runs the program on both a file with user read/write permissions (Should pass), and on a file with superuser read/write (Should fail).
-3. make permissions - Re-runs the superuser permission file in an elevated go executable (Should work).
-4. make invalid - Attempts to run the program on an invalid file (Should fail)
-5. make changing - Undefined behavior. Not implemented yet.
-6. make restore - Helper routine to restore sample files from backups with appropriate permissions
+2. make argument_test - Runs the command with no arguments .
+3. make normal_tests - Runs the program on both a file with user read/write permissions, and on a file with superuser read/write.
+5. make directory_test - Attempts to run on a directory.
+6. make nonexistent_test - Attempts to run the program on an invalid file.
+7. make empty_test - Attempts to run on an empty file.
+8. make negative_test - Should abort.
+9. make ambigious_test - Should abort.
+10. make permission_test - Re-runs the superuser permission file in an elevated go executable.
+11. make changing_test - Undefined behavior. Not implemented yet.
+12. make restore - Helper routine to restore sample files from backups with appropriate permissions.
